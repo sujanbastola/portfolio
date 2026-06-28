@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowDown, GitFork, Mail, MapPin, Link } from 'lucide-react';
 import { useLang } from '../context/LangContext';
+import profileImg from '../profile.jpg';
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -98,7 +99,7 @@ const Hero: React.FC = () => {
             padding: 3, boxShadow: '0 0 40px rgba(41,151,255,0.35)',
           }}>
             <img
-              src={`${process.env.PUBLIC_URL}/profile.jpg`}
+              src={profileImg}
               alt="Sujan Bastola"
               style={{
                 width: '100%', height: '100%', borderRadius: '50%',
