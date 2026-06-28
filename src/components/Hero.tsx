@@ -1,8 +1,36 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ArrowDown, GitFork, Mail, MapPin, Link } from 'lucide-react';
+import { ArrowDown, GitFork, Mail, MapPin, Link, User } from 'lucide-react';
 import { useLang } from '../context/LangContext';
 import profileImg from '../profile.jpg';
+
+const PhotoAvatar: React.FC = () => {
+  const [failed, setFailed] = React.useState(false);
+  if (failed) {
+    return (
+      <div style={{
+        width: '100%', height: '100%', borderRadius: '50%',
+        background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: '#86868b',
+      }}>
+        <User size={44} />
+      </div>
+    );
+  }
+  return (
+    <img
+      src={profileImg}
+      alt="Sujan Bastola"
+      onError={() => setFailed(true)}
+      style={{
+        width: '100%', height: '100%', borderRadius: '50%',
+        objectFit: 'cover', objectPosition: 'center top',
+        display: 'block',
+      }}
+    />
+  );
+};
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -98,15 +126,7 @@ const Hero: React.FC = () => {
             background: 'linear-gradient(135deg, #2997ff, #bf5af2)',
             padding: 3, boxShadow: '0 0 40px rgba(41,151,255,0.35)',
           }}>
-            <img
-              src={profileImg}
-              alt="Sujan Bastola"
-              style={{
-                width: '100%', height: '100%', borderRadius: '50%',
-                objectFit: 'cover', objectPosition: 'center top',
-                display: 'block',
-              }}
-            />
+            <PhotoAvatar />
           </div>
         </motion.div>
 
