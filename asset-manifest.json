@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sujan-portfolio/static/css/main.25205ab2.css",
-    "main.js": "/sujan-portfolio/static/js/main.eab3431d.js",
+    "main.js": "/sujan-portfolio/static/js/main.c9c3f93c.js",
     "static/js/453.8eca6f59.chunk.js": "/sujan-portfolio/static/js/453.8eca6f59.chunk.js",
     "index.html": "/sujan-portfolio/index.html",
     "main.25205ab2.css.map": "/sujan-portfolio/static/css/main.25205ab2.css.map",
-    "main.eab3431d.js.map": "/sujan-portfolio/static/js/main.eab3431d.js.map",
+    "main.c9c3f93c.js.map": "/sujan-portfolio/static/js/main.c9c3f93c.js.map",
     "453.8eca6f59.chunk.js.map": "/sujan-portfolio/static/js/453.8eca6f59.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.25205ab2.css",
-    "static/js/main.eab3431d.js"
+    "static/js/main.c9c3f93c.js"
   ]
 }
