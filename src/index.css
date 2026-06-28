@@ -63,3 +63,48 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
 ::selection { background: var(--accent); color: #fff; }
+
+/* ── Mobile responsive ── */
+@media (max-width: 600px) {
+  /* Section padding */
+  section { padding-left: 16px !important; padding-right: 16px !important; }
+
+  /* Navbar */
+  nav { padding: 0 20px !important; }
+
+  /* Hero */
+  #about { padding: 100px 16px 60px !important; }
+
+  /* Reduce section vertical padding */
+  section[id="skills"],
+  section[id="experience"],
+  section[id="projects"],
+  section[id="blog"],
+  section[id="contact"] {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+  }
+
+  /* Blog modal */
+  .blog-modal-inner { padding: 24px 20px 36px !important; }
+
+  /* Experience timeline — stack icon + card vertically on very small screens */
+  .timeline-row { gap: 12px !important; }
+}
+
+@media (max-width: 480px) {
+  /* Skills grid: single column */
+  .skills-grid { grid-template-columns: 1fr !important; }
+
+  /* Blog cards */
+  .blog-grid { grid-template-columns: 1fr !important; }
+
+  /* Contact cards */
+  .contact-grid { grid-template-columns: 1fr !important; }
+
+  /* Experience card padding */
+  .exp-card { padding: 20px 18px !important; }
+
+  /* Featured project card header — stack buttons below on tiny screens */
+  .project-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+}

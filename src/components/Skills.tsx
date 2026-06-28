@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -15,12 +15,37 @@ const skills = [
   { name: 'Bootstrap', level: 88, color: '#7952b3', category: 'Frontend' },
   { name: 'WordPress', level: 82, color: '#21759b', category: 'Frontend' },
   { name: 'AWS (Cloud Practitioner)', level: 80, color: '#ff9900', category: 'DevOps' },
+  { name: 'Git', level: 90, color: '#f05032', category: 'DevOps' },
+  { name: 'GitHub', level: 90, color: '#ffffff', category: 'DevOps' },
+  { name: 'Azure DevOps', level: 78, color: '#0078d4', category: 'DevOps' },
 ];
 
 const categories = ['All', 'Frontend', 'Backend', 'Database', 'DevOps'];
 
+const useCountUp = (target: number, inView: boolean, delay: number) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      const duration = 1200;
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) { setCount(target); clearInterval(interval); }
+        else setCount(Math.floor(current));
+      }, duration / steps);
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, target, delay]);
+  return count;
+};
+
 const SkillBar: React.FC<{ skill: typeof skills[0]; delay: number }> = ({ skill, delay }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const count = useCountUp(skill.level, inView, delay);
 
   return (
     <motion.div
@@ -48,7 +73,7 @@ const SkillBar: React.FC<{ skill: typeof skills[0]; delay: number }> = ({ skill,
             borderRadius: 10, background: `${skill.color}18`, color: skill.color,
           }}>{skill.category}</span>
         </div>
-        <span style={{ fontSize: 13, color: 'var(--text-secondary)', fontWeight: 600 }}>{skill.level}%</span>
+        <span style={{ fontSize: 13, color: 'var(--text-secondary)', fontWeight: 600 }}>{count}%</span>
       </div>
       <div style={{ height: 4, background: 'var(--border)', borderRadius: 4, overflow: 'hidden' }}>
         <motion.div
@@ -69,7 +94,7 @@ const Skills: React.FC = () => {
   const filtered = activeCategory === 'All' ? skills : skills.filter(s => s.category === activeCategory);
 
   return (
-    <section id="skills" style={{ padding: '120px 24px', background: 'var(--bg-secondary)' }}>
+    <section id="skills" style={{ padding: 'clamp(80px, 10vw, 120px) clamp(16px, 4vw, 24px)', background: 'var(--bg-secondary)' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <motion.div
           ref={ref}
@@ -107,7 +132,8 @@ const Skills: React.FC = () => {
 
         <motion.div
           layout
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 12 }}
+          className="skills-grid"
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 360px), 1fr))', gap: 12 }}
         >
           {filtered.map((skill, i) => (
             <SkillBar key={skill.name} skill={skill} delay={i * 0.07} />

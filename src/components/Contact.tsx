@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, GitFork, MapPin, Copy, Check } from 'lucide-react';
+import { Mail, GitFork, MapPin, Copy, Check, Link } from 'lucide-react';
+import { useLang } from '../context/LangContext';
 
 const Contact: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [copied, setCopied] = useState(false);
+  const { t } = useLang();
 
   const copyEmail = () => {
     navigator.clipboard.writeText('bastolasujan202@gmail.com');
@@ -19,7 +21,7 @@ const Contact: React.FC = () => {
       label: 'Email',
       value: 'bastolasujan202@gmail.com',
       action: copyEmail,
-      actionLabel: copied ? 'Copied!' : 'Copy',
+      actionLabel: copied ? t.contact.copied : t.contact.copy,
       actionIcon: copied ? <Check size={14} /> : <Copy size={14} />,
       color: '#2997ff',
     },
@@ -28,9 +30,18 @@ const Contact: React.FC = () => {
       label: 'GitHub',
       value: 'github.com/sujanbastola',
       href: 'https://github.com/sujanbastola',
-      actionLabel: 'View Profile',
+      actionLabel: t.contact.viewProfile,
       actionIcon: <GitFork size={14} />,
       color: '#bf5af2',
+    },
+    {
+      icon: <Link size={24} />,
+      label: 'LinkedIn',
+      value: 'Sujan Bastola',
+      href: 'https://jp.linkedin.com/in/sujan-bastola-7199b2259',
+      actionLabel: t.contact.viewProfile,
+      actionIcon: <Link size={14} />,
+      color: '#0a66c2',
     },
     {
       icon: <MapPin size={24} />,
@@ -42,7 +53,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" style={{ padding: '120px 24px 80px' }}>
+    <section id="contact" style={{ padding: 'clamp(80px, 10vw, 120px) clamp(16px, 4vw, 24px) clamp(60px, 8vw, 80px)' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <motion.div
           ref={ref}
@@ -51,16 +62,16 @@ const Contact: React.FC = () => {
           transition={{ duration: 0.8 }}
           style={{ textAlign: 'center', marginBottom: 72 }}
         >
-          <p style={{ color: 'var(--accent)', fontSize: 13, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>Contact</p>
+          <p style={{ color: 'var(--accent)', fontSize: 13, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>{t.contact.label}</p>
           <h2 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 800, letterSpacing: -2, marginBottom: 16 }}>
-            Let's Build Together
+            {t.contact.title}
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: 17, maxWidth: 500, margin: '0 auto', lineHeight: 1.7 }}>
-            I'm open to new opportunities, collaborations, and interesting problems. Feel free to reach out.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20, marginBottom: 60 }}>
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 240px), 1fr))', gap: 16, marginBottom: 48 }}>
           {cards.map((card, i) => (
             <motion.div
               key={card.label}
@@ -146,7 +157,7 @@ const Contact: React.FC = () => {
           }}
         >
           <p style={{ fontSize: 15, color: 'var(--text-secondary)', marginBottom: 20 }}>
-            Ready to work together? Send me a message.
+            {t.contact.cta}
           </p>
           <motion.a
             href="mailto:bastolasujan202@gmail.com"
@@ -159,7 +170,7 @@ const Contact: React.FC = () => {
               boxShadow: '0 4px 20px rgba(41,151,255,0.35)',
             }}
           >
-            <Mail size={18} /> Send Email
+            <Mail size={18} /> {t.contact.sendEmail}
           </motion.a>
         </motion.div>
       </div>

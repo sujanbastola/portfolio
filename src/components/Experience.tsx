@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
+import { Briefcase, GraduationCap, Calendar, ExternalLink } from 'lucide-react';
 
 const timeline = [
   {
@@ -10,8 +10,10 @@ const timeline = [
     org: 'Espec Corp',
     period: '2021 – Present · 5 years',
     location: 'Osaka, Japan',
-    description: 'Building and maintaining full-stack applications with Ruby on Rails and React. Developing internal tools, APIs, and Linux-based systems for industrial environments.',
-    tags: ['Ruby', 'Rails', 'React', 'Linux', 'REST API'],
+    description: 'Building and maintaining full-stack applications with Ruby and React. Developing internal tools, APIs, and Linux-based systems for a world-leading R&D equipment manufacturer.',
+    tags: ['Ruby', 'React', 'Linux', 'REST API', 'PostgreSQL'],
+    link: 'https://www.espec.co.jp/english/corporate/research.html',
+    linkLabel: 'Espec R&D Center',
   },
   {
     type: 'education',
@@ -34,7 +36,7 @@ const TimelineItem: React.FC<{ item: typeof timeline[0]; index: number }> = ({ i
       initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      style={{ display: 'flex', gap: 24, marginBottom: 40 }}
+      className="timeline-row" style={{ display: 'flex', gap: 20, marginBottom: 40 }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
         <div style={{
@@ -52,7 +54,7 @@ const TimelineItem: React.FC<{ item: typeof timeline[0]; index: number }> = ({ i
         whileHover={{ y: -4 }}
         style={{
           flex: 1, background: 'var(--bg-card)', border: '1px solid var(--border)',
-          borderRadius: 20, padding: '28px 32px', marginBottom: 12,
+          borderRadius: 20, padding: 'clamp(16px, 3vw, 28px) clamp(16px, 3vw, 32px)', marginBottom: 12,
           transition: 'border-color 0.2s, box-shadow 0.2s',
         }}
         onMouseEnter={e => {
@@ -81,7 +83,7 @@ const TimelineItem: React.FC<{ item: typeof timeline[0]; index: number }> = ({ i
           {item.description}
         </p>
 
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: item.link ? 16 : 0 }}>
           {item.tags.map(tag => (
             <span key={tag} style={{
               fontSize: 12, fontWeight: 600, padding: '4px 10px',
@@ -89,6 +91,22 @@ const TimelineItem: React.FC<{ item: typeof timeline[0]; index: number }> = ({ i
             }}>{tag}</span>
           ))}
         </div>
+        {item.link && (
+          <motion.a
+            href={item.link} target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.04, y: -1 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              fontSize: 13, fontWeight: 700,
+              color: 'var(--accent)', textDecoration: 'none',
+              padding: '8px 16px', borderRadius: 20,
+              background: 'rgba(41,151,255,0.1)',
+              border: '1px solid rgba(41,151,255,0.25)',
+            }}
+          >
+            <ExternalLink size={13} /> {item.linkLabel}
+          </motion.a>
+        )}
       </motion.div>
     </motion.div>
   );
@@ -98,7 +116,7 @@ const Experience: React.FC = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="experience" style={{ padding: '120px 24px' }}>
+    <section id="experience" style={{ padding: 'clamp(80px, 10vw, 120px) clamp(16px, 4vw, 24px)' }}>
       <div style={{ maxWidth: 800, margin: '0 auto' }}>
         <motion.div
           ref={ref}

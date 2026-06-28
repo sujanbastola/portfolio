@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ArrowDown, GitFork, Mail, MapPin } from 'lucide-react';
+import { ArrowDown, GitFork, Mail, MapPin, Link } from 'lucide-react';
+import { useLang } from '../context/LangContext';
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,6 +69,8 @@ const Hero: React.FC = () => {
     return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
   }, []);
 
+  const { t } = useLang();
+
   const container: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
   const item: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -87,10 +90,29 @@ const Hero: React.FC = () => {
         variants={container} initial="hidden" animate="show"
         style={{ position: 'relative', textAlign: 'center', padding: '120px 24px 80px', maxWidth: 900, margin: '0 auto' }}
       >
+        {/* Profile photo */}
+        <motion.div variants={item} style={{ marginBottom: 24, display: 'flex', justifyContent: 'center' }}>
+          <div style={{
+            width: 110, height: 110, borderRadius: '50%',
+            background: 'linear-gradient(135deg, #2997ff, #bf5af2)',
+            padding: 3, boxShadow: '0 0 40px rgba(41,151,255,0.35)',
+          }}>
+            <img
+              src="/profile.jpg"
+              alt="Sujan Bastola"
+              style={{
+                width: '100%', height: '100%', borderRadius: '50%',
+                objectFit: 'cover', objectPosition: 'center top',
+                display: 'block',
+              }}
+            />
+          </div>
+        </motion.div>
+
         <motion.div variants={item} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 24 }}>
           <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#30d158', boxShadow: '0 0 12px #30d158' }} />
           <span style={{ fontSize: 13, color: 'var(--text-secondary)', letterSpacing: 1, textTransform: 'uppercase', fontWeight: 500 }}>
-            Available for opportunities
+            {t.hero.available}
           </span>
         </motion.div>
 
@@ -116,7 +138,7 @@ const Hero: React.FC = () => {
           marginBottom: 12,
           letterSpacing: -0.5,
         }}>
-          Full Stack Developer
+          {t.hero.title}
         </motion.p>
 
         <motion.div variants={item} style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 24 }}>
@@ -134,7 +156,7 @@ const Hero: React.FC = () => {
           fontSize: 18, color: 'var(--text-secondary)', maxWidth: 500, margin: '0 auto 40px',
           lineHeight: 1.7, fontStyle: 'italic',
         }}>
-          "Build it by yourself."
+          {t.hero.bio}
         </motion.p>
 
         <motion.div variants={item} style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', marginBottom: 40 }}>
@@ -143,7 +165,7 @@ const Hero: React.FC = () => {
           </span>
           <span style={{ color: 'var(--border-hover)' }}>·</span>
           <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'var(--text-tertiary)', fontSize: 13 }}>
-            5 years experience
+            {t.hero.experience}
           </span>
         </motion.div>
 
@@ -161,7 +183,21 @@ const Hero: React.FC = () => {
               boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
             }}
           >
-            <GitFork size={18} /> GitHub
+            <GitFork size={18} /> {t.hero.github}
+          </motion.a>
+          <motion.a
+            href="https://jp.linkedin.com/in/sujan-bastola-7199b2259"
+            target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.97 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '12px 28px', borderRadius: 40,
+              background: '#0a66c2', color: '#fff',
+              fontSize: 15, fontWeight: 600, textDecoration: 'none',
+              boxShadow: '0 4px 20px rgba(10,102,194,0.35)',
+            }}
+          >
+            <Link size={18} /> LinkedIn
           </motion.a>
           <motion.a
             href="mailto:bastolasujan202@gmail.com"
@@ -169,13 +205,11 @@ const Hero: React.FC = () => {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               padding: '12px 28px', borderRadius: 40,
-              background: 'transparent',
-              border: '1px solid var(--border-hover)',
-              color: 'var(--text-primary)',
-              fontSize: 15, fontWeight: 600, textDecoration: 'none',
+              background: 'transparent', border: '1px solid var(--border-hover)',
+              color: 'var(--text-primary)', fontSize: 15, fontWeight: 600, textDecoration: 'none',
             }}
           >
-            <Mail size={18} /> Get in touch
+            <Mail size={18} /> {t.hero.contact}
           </motion.a>
         </motion.div>
       </motion.div>
