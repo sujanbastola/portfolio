@@ -1,46 +1,109 @@
-# Getting Started with Create React App
+# Sujan Bastola — Personal Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 🌐 **Live:** [sujanbastola.github.io/sujan-portfolio](https://sujanbastola.github.io/sujan-portfolio)
 
-## Available Scripts
+A modern, Apple-inspired personal portfolio built from scratch with React & TypeScript. Features smooth animations, dark/light mode, full EN/日本語 language support, and a fully responsive layout.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Feature | Details |
+|---|---|
+| ⚡ Animated hero | Particle canvas background, gradient name, live status badge |
+| 🌙 Dark / Light mode | Seamless toggle with CSS variables |
+| 🇯🇵 EN / 日本語 | Full bilingual support across all sections |
+| 🎬 Loading screen | Plays once per session using sessionStorage |
+| 📊 Scroll progress bar | Gradient bar tracks reading position |
+| 🔝 Back to top | Floating gradient button appears after scroll |
+| 🛠️ Skills section | Animated bars with count-up numbers & category filter |
+| 🗂️ Projects | Featured cards with live links, NDA toggle for company work |
+| 📝 Blog | Full article modal for 3 project deep-dives |
+| 📬 Contact | One-click email copy, LinkedIn, GitHub, timezone |
+| 📱 Mobile responsive | Fluid `clamp()` layout, hamburger menu, single-column grids |
+| 🔍 SEO & OG | Meta tags, Open Graph image, Twitter card |
+| 📦 PWA ready | Custom manifest, branded favicon |
+| 🚫 Custom 404 | Branded error page instead of GitHub default |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🗂️ Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├── components/
+│   ├── Hero.tsx           # Full-screen hero with particle canvas
+│   ├── Navbar.tsx         # Glassmorphism nav, lang/theme toggles
+│   ├── Skills.tsx         # Animated skill bars with category filter
+│   ├── Experience.tsx     # Timeline — work & education
+│   ├── Projects.tsx       # Featured project cards + NDA toggle
+│   ├── Blog.tsx           # Blog cards with full article modal
+│   ├── Contact.tsx        # Contact cards with copy & social links
+│   ├── Footer.tsx         # Minimal footer
+│   ├── LoadingScreen.tsx  # One-time animated intro
+│   ├── ScrollProgress.tsx # Top progress bar
+│   └── BackToTop.tsx      # Floating scroll-to-top button
+├── context/
+│   ├── ThemeContext.tsx    # Dark / light mode
+│   └── LangContext.tsx    # EN / JP language toggle
+└── i18n/
+    └── translations.ts    # All EN & JP strings
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Clone the repo
+git clone https://github.com/sujanbastola/sujan-portfolio.git
+cd sujan-portfolio
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Install dependencies
+npm install
 
-### `npm run eject`
+# Start dev server
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🛠️ Tech Stack
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+| Layer | Technology |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Scroll detection | react-intersection-observer |
+| Styling | CSS Variables (no CSS framework) |
+| Deployment | GitHub Pages via `gh-pages` |
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🌍 Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+# Build and deploy to GitHub Pages
+npm run deploy
+```
+
+Deploys to the `gh-pages` branch automatically. Live at:
+**[https://sujanbastola.github.io/sujan-portfolio](https://sujanbastola.github.io/sujan-portfolio)**
+
+---
+
+## 👤 About Me
+
+**Sujan Bastola** — Full Stack Developer based in Osaka, Japan.
+5 years of experience at [Espec Corp](https://www.espec.co.jp/english/corporate/research.html) building Ruby APIs, React dashboards, Linux systems, and AI agent workflows.
+
+- 🐙 GitHub: [github.com/sujanbastola](https://github.com/sujanbastola)
+- 💼 LinkedIn: [linkedin.com/in/sujan-bastola-7199b2259](https://jp.linkedin.com/in/sujan-bastola-7199b2259)
+- 📧 Email: bastolasujan202@gmail.com
+
+---
+
+*Built by myself — because the best way to learn is to build.* 🛠️
